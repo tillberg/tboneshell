@@ -1,5 +1,23 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var _ = require('lodash')
+function decorate(obj){
+	var size = 0
+	for (property in obj){
+		size += obj[property].length
+	}
+	
+	var result = {size_on_disk: size}
+	_.assign(result, obj)
+
+	return result
+}
+
+module.exports = {
+	decorate: decorate
+}
+
+},{"lodash":7}],2:[function(require,module,exports){
+var _ = require('lodash')
 
 function SortOrder(property, direction){
 	this.property = property
@@ -26,7 +44,7 @@ SortOrder.DESCENDING = false
 
 module.exports = SortOrder
 
-},{"lodash":6}],2:[function(require,module,exports){
+},{"lodash":7}],3:[function(require,module,exports){
 function double(n){
 	return 2*n
 }
@@ -34,10 +52,11 @@ function double(n){
 module.exports = {
 	double: double,
 	templates: require('./templates'),
-	SortOrder: require('./SortOrder')
+	SortOrder: require('./SortOrder'),
+	Decorator: require('./Decorator')
 }
 
-},{"./SortOrder":1,"./templates":5}],3:[function(require,module,exports){
+},{"./Decorator":1,"./SortOrder":2,"./templates":6}],4:[function(require,module,exports){
 module.exports = [
   {
     "color": "red",
@@ -761,14 +780,19 @@ module.exports = [
   }
 ]
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var core = require('./core')
 var data = require('./data')
 
 T('data', data)
+T('decoratedData', function(){
+	var data = T('data')
+
+	return data.map(core.Decorator.decorate)
+})
 T('currentSort', new core.SortOrder())
 T('sortedData', function(){
-	var data = T('data')
+	var data = T('decoratedData')
 	var sort = T('currentSort')
 
 	return sort.sortThusly(data)
@@ -791,7 +815,7 @@ $(function(){
 
 
 
-},{"./core":2,"./data":3}],5:[function(require,module,exports){
+},{"./core":3,"./data":4}],6:[function(require,module,exports){
 
 function tableTemplate(objs){
 	var rows = objs.map(rowTemplate).join('')
@@ -836,7 +860,7 @@ module.exports = {
 	sortMessage: sortMessage
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -12439,4 +12463,4 @@ module.exports = {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[4]);
+},{}]},{},[5]);

@@ -2,9 +2,14 @@ var core = require('./core')
 var data = require('./data')
 
 T('data', data)
+T('decoratedData', function(){
+	var data = T('data')
+
+	return data.map(core.Decorator.decorate)
+})
 T('currentSort', new core.SortOrder())
 T('sortedData', function(){
-	var data = T('data')
+	var data = T('decoratedData')
 	var sort = T('currentSort')
 
 	return sort.sortThusly(data)
