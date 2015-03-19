@@ -1,3 +1,14 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+function double(n){
+	return 2*n
+}
+
+module.exports = {
+	double: double,
+	templates: require('./templates')
+}
+
+},{"./templates":4}],2:[function(require,module,exports){
 module.exports = [
   {
     "color": "red",
@@ -720,3 +731,66 @@ module.exports = [
     "time": "future"
   }
 ]
+
+},{}],3:[function(require,module,exports){
+var core = require('./core')
+var data = require('./data')
+
+$(function(){
+	
+	T('data', data)
+
+	T(function(){
+		var data = T('data') || []
+		var html = core.templates.table(data)
+		document.body.innerHTML = html 
+	})
+
+})
+
+
+
+
+},{"./core":1,"./data":2}],4:[function(require,module,exports){
+
+function tableTemplate(objs){
+	var rows = objs.map(rowTemplate).join('')
+	return tag('table', headerTemplate() + rows)
+}
+
+function rowTemplate(obj){
+	return tr(
+					td(obj.color) +
+					td(obj.size) +
+					td(obj.visibility) +
+					td(obj.time)
+					)
+}
+function headerTemplate(){
+	var attributes = ['Color', 'Size', 'Visibility', 'Time']
+	var ths = attributes.map(th).join('')
+	return tag('thead', tr(ths))
+}
+
+function th(val){
+	return tag('th', val)
+}
+
+function tr(val){
+	return tag('tr', val)
+}
+
+function td(val){
+	return tag('td', val)
+}
+function tag(tag, val){
+	return '<'+tag+'>'+val+'</'+tag+'>'
+}
+
+module.exports = {
+	header: headerTemplate,
+	table: tableTemplate,
+	row: rowTemplate
+}
+
+},{}]},{},[3]);
