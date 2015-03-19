@@ -3,8 +3,12 @@ function SortOrder(property, direction){
 	this.direction = direction
 }
 
-SortOrder.prototype.sortBy = function sortBy(item){
-	return new SortOrder(item, !this.direction)
+SortOrder.prototype.sortBy = function sortBy(property){
+	var direction = SortOrder.ASCENDING
+	if (property === this.property)
+		direction = !this.direction
+
+	return new SortOrder(property, direction)
 }
 
 SortOrder.ASCENDING = true

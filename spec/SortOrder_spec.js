@@ -26,4 +26,9 @@ describe('SortOrder', function(){
 		empty.sortBy('name').sortBy('name')
 			.direction.should.equal(SortOrder.DESCENDING)
 	})
+
+	it('always starts ascending', function(){
+		empty.sortBy('name').sortBy('color')
+			.direction.should.equal(SortOrder.ASCENDING)
+	})
 })
