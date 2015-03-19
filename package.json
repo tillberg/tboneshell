@@ -4,10 +4,10 @@
   "description": "This is a random stab at merging Gary Bernhardt's [functional core, imperative shell][das-fcis] with reactive programming, using the [TBone][tbone] library. I was introduced to the functional core idea by [this][das-boundaries] talk of his, and it crystalized some thoughts I had about why some code lends itself to maintainance and testing, while some code makes it difficult. I highly recommend watching it.",
   "main": " ",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha spec"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Aaron Sikes",
+  "license": "MIT",
   "devDependencies": {
     "chai": "^2.1.2",
     "mocha": "^2.2.1"
