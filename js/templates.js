@@ -1,20 +1,17 @@
 
 function tableTemplate(objs){
 	var rows = objs.map(rowTemplate).join('')
-	return tag('table', headerTemplate() + rows)
+	return tag('table', headerTemplate(objs[0]) + rows)
 }
 
 function rowTemplate(obj){
-	return tr(
-					td(obj.color) +
-					td(obj.size) +
-					td(obj.visibility) +
-					td(obj.time)
-					)
+	var tds = Object.keys(obj).map(function(key){
+		return td(obj[key])
+	})
+	return tr(tds.join(''))
 }
-function headerTemplate(){
-	var attributes = ['Color', 'Size', 'Visibility', 'Time']
-	var ths = attributes.map(th).join('')
+function headerTemplate(obj){
+	var ths = Object.keys(obj).map(th).join('')
 	return tag('thead', tr(ths))
 }
 
