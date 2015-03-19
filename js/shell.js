@@ -2,7 +2,7 @@ var core = require('./core')
 var data = require('./data')
 
 T('data', data)
-T('sortOrder', new core.SortOrder())
+T('currentSort', new core.SortOrder())
 
 $(function(){
 	T(function(){
@@ -11,13 +11,13 @@ $(function(){
 		document.body.innerHTML = html 
 		$('th').click(function(){
 			var sortProperty = $(this).text()
-			var sort = T('sortOrder')
+			var sort = T('currentSort')
 
-			T('sortOrder', sort.sortBy(sortProperty))
+			T('currentSort', sort.sortBy(sortProperty))
 		})
 	})
 	T(function(){
-		var sort = T('sortOrder')
+		var sort = T('currentSort')
 
 		var message = core.templates.sortMessage(sort)
 
