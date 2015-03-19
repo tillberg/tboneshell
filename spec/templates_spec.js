@@ -1,5 +1,5 @@
 var should = require('chai').should()
-var templates = require('../templates')
+var templates = require('../js/templates')
 
 describe('The row template', function(){
 	it('Should render a row', function(){

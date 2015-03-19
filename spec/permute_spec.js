@@ -1,5 +1,5 @@
 var should = require('chai').should()
-var permute = require('../permute')
+var permute = require('../js/permute')
 
 describe('Permuter', function(){
 	it('should create single variable permutations', function(){
