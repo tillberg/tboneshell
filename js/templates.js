@@ -33,8 +33,14 @@ function tag(tag, val){
 	return '<'+tag+'>'+val+'</'+tag+'>'
 }
 
+function sortMessage(sortDirection){
+	var direction = sortDirection.direction ? 'ascending' : 'descending'
+	return tag('div', 'Sorting '+direction+' by '+sortDirection.property+'.')
+}
+
 module.exports = {
 	header: headerTemplate,
 	table: tableTemplate,
-	row: rowTemplate
+	row: rowTemplate,
+	sortMessage: sortMessage
 }

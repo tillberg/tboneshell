@@ -11,17 +11,19 @@ describe('SortOrder', function(){
 		empty.sortBy('name')
 			.property.should.equal('name')
 	})
+
 	it('has only a single sort', function(){
 		empty.sortBy('name').sortBy('color')
 			.property.should.equal('color')
 	})
+
 	it('has sort direction', function(){
 		empty.sortBy('name').
-			order.should.equal(SortOrder.ASCENDING)
+			direction.should.equal(SortOrder.ASCENDING)
 	})
 
 	it('toggles sort direction', function(){
 		empty.sortBy('name').sortBy('name')
-			.order.should.equal(SortOrder.DESCENDING)
+			.direction.should.equal(SortOrder.DESCENDING)
 	})
 })

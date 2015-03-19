@@ -4,5 +4,6 @@ function double(n){
 
 module.exports = {
 	double: double,
-	templates: require('./templates')
+	templates: require('./templates'),
+	SortOrder: require('./SortOrder')
 }

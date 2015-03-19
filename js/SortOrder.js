@@ -1,10 +1,10 @@
-function SortOrder(property, order){
+function SortOrder(property, direction){
 	this.property = property
-	this.order = order
+	this.direction = direction
 }
 
 SortOrder.prototype.sortBy = function sortBy(item){
-	return new SortOrder(item, !this.order)
+	return new SortOrder(item, !this.direction)
 }
 
 SortOrder.ASCENDING = true
