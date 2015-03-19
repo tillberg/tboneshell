@@ -802,7 +802,7 @@ $(function(){
 	T(function(){
 		var data = T('sortedData') || []
 		var html = core.templates.table(data)
-		document.body.innerHTML = html 
+		$('table')[0].outerHTML = html
 		$('th').click(function(){
 			var sortProperty = $(this).text().toLowerCase()
 			var sort = T('currentSort')
