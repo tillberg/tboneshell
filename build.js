@@ -790,23 +790,22 @@ var data = require('./data')
 // server, the current sort property, and the current sort
 // direction.
 
-// T('mem') is where I store all transient page state.
+// T('ls') is where I store all transient page state.
 // Everything else here should be some sort of `bound`
 // model (including e.g. ajax models, which in a real
 // application, T('data') would be an ajax model or
 // something along those lines).
-T('mem', {
-	sortProp: null,
-	sortAsc: null,
-});
+T('ls', tbone.models.localStorage.make({
+	key: 'sortSettings',
+}));
 
 // T('currentSort') calculates the *defaulted* sort
 // property and direction.
 var defaultSortProp = 'size_on_disk';
 var defaultSortAsc = true;
 T('defaultedSort', function() {
-	var sortProp = T('mem.sortProp');
-	var sortAsc = T('mem.sortAsc');
+	var sortProp = T('ls.sortProp');
+	var sortAsc = T('ls.sortAsc');
 	return {
 		prop: sortProp != null ? sortProp : defaultSortProp,
 		asc: sortAsc != null ? sortAsc : defaultSortAsc,
@@ -836,17 +835,14 @@ $(function(){
 			var newSortProp = $(this).text().toLowerCase();
 			var currentSortProp = T.readSilent('defaultedSort.prop');
 			if (newSortProp !== currentSortProp) {
-				T('mem.sortProp', newSortProp);
-				T('mem.sortAsc', null);
+				T('ls.sortProp', newSortProp);
+				T('ls.sortAsc', null);
 			} else {
-				T('mem.sortAsc', !T.readSilent('defaultedSort.asc'));
+				T('ls.sortAsc', !T.readSilent('defaultedSort.asc'));
 			}
 		})
 	})
 })
-
-
-
 
 },{"./core":3,"./data":4}],6:[function(require,module,exports){
 
