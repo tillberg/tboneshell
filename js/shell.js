@@ -24,11 +24,9 @@ var data = require('./data')
 // server, the current sort property, and the current sort
 // direction.
 
-// T('ls') is where I store all transient page state.
-// Everything else here should be some sort of `bound`
-// model (including e.g. ajax models, which in a real
-// application, T('data') would be an ajax model or
-// something along those lines).
+// T('ls') is where we'll store all the changeable page
+// state, and is automatically two-way-persisted to
+// localStorage (in localStorage.sortSettings).
 T('ls', tbone.models.localStorage.make({
 	key: 'sortSettings',
 }));
